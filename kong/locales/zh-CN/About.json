@@ -2,9 +2,16 @@
   "title": "关于",
   "config": {
     "title": "配置详情",
-    "copy": "复制配置 JSON"
+    "description": "Kong 节点的完整 JSON 格式配置。",
+    "copy": "复制配置 JSON",
+    "copied": "已复制！",
+    "copyFailed": "复制失败"
   },
   "reference": {
-    "title": "配置参考文档"
+    "title": "配置参考文档",
+    "description": "Kong 所有配置参数的完整参考文档。"
+  },
+  "resources": {
+    "title": "资源"
   }
 }

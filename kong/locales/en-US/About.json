@@ -2,9 +2,16 @@
   "title": "About",
   "config": {
     "title": "Config Details",
-    "copy": "Copy Config JSON"
+    "description": "Full Kong node configuration in JSON format.",
+    "copy": "Copy Config JSON",
+    "copied": "Copied!",
+    "copyFailed": "Copy failed"
   },
   "reference": {
-    "title": "Config Reference Docs"
+    "title": "Config Reference Docs",
+    "description": "Full reference for all Kong configuration parameters."
+  },
+  "resources": {
+    "title": "Resources"
   }
 }
