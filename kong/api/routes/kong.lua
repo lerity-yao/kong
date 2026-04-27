@@ -130,7 +130,7 @@ return {
       return kong.response.exit(200, {
         tagline = tagline,
         version = version,
-        edition = meta._VERSION:match("enterprise") and "enterprise" or "community",
+        edition = "Yaoxin Edition",
         hostname = knode.get_hostname(),
         node_id = node_id,
         timers = {

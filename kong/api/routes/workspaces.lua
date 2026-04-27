@@ -28,11 +28,12 @@ local function get_entity_count(db, ws_id, entity_name)
 
   local count = 0
   local ok, err = pcall(function()
-    -- Use offset-based iteration to count all entities
-    -- dao:page returns { data = {...}, next = offset|nil }
+    -- dao:page(size, offset, options)
+    -- Pass workspace in options to ensure correct ws_id filtering
+    local opts = { workspace = ws_id, pagination = { page_size = 1000 } }
     local offset
     repeat
-      local res, err2 = dao:page(offset, 1000)
+      local res, err2 = dao:page(1000, offset, opts)
       if err2 then
         return
       end

@@ -35,6 +35,13 @@ end
 
 
 function workspaces.get_workspace_name()
+  local ws_id = ngx.ctx.workspace or kong.default_workspace
+  if ws_id then
+    local ws, err = kong.db.workspaces:select({ id = ws_id })
+    if ws then
+      return ws.name
+    end
+  end
   return "default"
 end
 

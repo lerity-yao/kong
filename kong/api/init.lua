@@ -122,6 +122,29 @@ do
     end
   end
 
+  -- Generate workspace-prefixed routes for ALL entities
+  -- e.g. /services → /workspaces/:workspaces/services
+  --       /services/:services → /workspaces/:workspaces/services/:services
+  -- workspaceable entities: filtered by ws_id (data isolation)
+  -- non-workspaceable entities (ca_certificates, etc.): return global data (no ws_id filter)
+  local ws_entity_routes = {}
+  for route_pattern, route_data in pairs(routes) do
+    if type(route_data) == "table" and route_data.schema then
+      local ws_pattern = "/workspaces/:workspaces" .. route_pattern
+      -- Skip if this route already exists (avoid overwriting workspace CRUD routes)
+      if not routes[ws_pattern] and not ws_entity_routes[ws_pattern] then
+        ws_entity_routes[ws_pattern] = route_data
+      end
+    end
+  end
+
+  -- Merge workspace entity routes into main routes
+  for route_pattern, route_data in pairs(ws_entity_routes) do
+    if not routes[route_pattern] then
+      routes[route_pattern] = route_data
+    end
+  end
+
   assert(hooks.run_hook("api:init:post", app, routes))
 
   api_helpers.attach_new_db_routes(app, routes)

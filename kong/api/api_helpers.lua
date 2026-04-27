@@ -238,7 +238,31 @@ local ACCEPTS_YAML = tablex.readonly({
 })
 
 
+local function set_workspace_context(self)
+  -- Workspace context: if route has :workspaces param, set ngx.ctx.workspace
+  if self.params and self.params.workspaces then
+    local ws_name = self.params.workspaces
+    local ws, err = kong.db.workspaces:select_by_name(ws_name)
+    if err then
+      return kong.response.exit(500, { message = "Workspace lookup failed" })
+    end
+    if not ws then
+      return kong.response.exit(404, { message = "Workspace '" .. ws_name .. "' not found" })
+    end
+    ngx.ctx.workspace = ws.id
+  end
+
+  return true
+end
+
+
 function _M.before_filter(self)
+  -- Set workspace context for ALL methods (GET/POST/PUT/PATCH/DELETE/OPTIONS)
+  local ws_ok, ws_err = set_workspace_context(self)
+  if not ws_ok then
+    return ws_err
+  end
+
   if not NEEDS_BODY[get_method()] then
     return
   end
