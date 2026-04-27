@@ -1,0 +1,10 @@
+{
+  "description": "通过集中管理密钥来提升 Kong 网关部署的安全性。",
+  "created": "Vault \"{name}\" 创建成功！",
+  "updated": "Vault \"{name}\" 更新成功！",
+  "deleted": "Vault \"{name}\" 删除成功！",
+  "list.title": "Vault",
+  "detail.title": "Vault: {name}",
+  "create.form.title": "新建 Vault",
+  "edit.form.title": "编辑 Vault"
+}

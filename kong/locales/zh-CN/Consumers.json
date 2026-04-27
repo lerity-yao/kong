@@ -1,0 +1,10 @@
+{
+  "description": "消费者是服务的终端用户。",
+  "created": "消费者 \"{name}\" 创建成功！",
+  "updated": "消费者 \"{name}\" 更新成功！",
+  "deleted": "消费者 \"{name}\" 删除成功！",
+  "list.title": "消费者",
+  "detail.title": "消费者: {name}",
+  "create.form.title": "新建消费者",
+  "edit.form.title": "编辑消费者"
+}

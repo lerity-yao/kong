@@ -1,0 +1,10 @@
+{
+  "description": "Gateway Service entities are abstractions of each of your own upstream services, e.g., a data transformation microservice, a billing API.",
+  "created": "Gateway Service \"{name}\" successfully created!",
+  "updated": "Gateway Service \"{name}\" successfully updated!",
+  "deleted": "Gateway Service \"{name}\" successfully deleted!",
+  "list.title": "Gateway Services",
+  "detail.title": "Gateway Service: {name}",
+  "create.form.title": "New Gateway Service",
+  "edit.form.title": "Edit Gateway Service"
+}

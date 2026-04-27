@@ -1,0 +1,27 @@
+{
+  "title": "RBAC",
+  "roles": {
+    "list.title": "角色",
+    "detail.title": "角色: {name}",
+    "create.form.title": "新建角色",
+    "edit.form.title": "编辑角色",
+    "created": "角色 \"{name}\" 创建成功！",
+    "updated": "角色 \"{name}\" 更新成功！",
+    "deleted": "角色 \"{name}\" 删除成功！"
+  },
+  "users": {
+    "list.title": "用户",
+    "detail.title": "用户: {name}",
+    "create.form.title": "新建用户",
+    "edit.form.title": "编辑用户",
+    "created": "用户 \"{name}\" 创建成功！",
+    "updated": "用户 \"{name}\" 更新成功！",
+    "deleted": "用户 \"{name}\" 删除成功！"
+  },
+  "permissions": {
+    "title": "权限",
+    "endpoint": "端点",
+    "action": "操作",
+    "workspace": "工作空间"
+  }
+}

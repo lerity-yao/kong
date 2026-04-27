@@ -1,0 +1,10 @@
+{
+  "description": "上游代表一个虚拟主机名，可用于在多个服务之间负载均衡传入请求。",
+  "created": "上游 \"{name}\" 创建成功！",
+  "updated": "上游 \"{name}\" 更新成功！",
+  "deleted": "上游 \"{name}\" 删除成功！",
+  "list.title": "上游",
+  "detail.title": "上游: {name}",
+  "create.form.title": "新建上游",
+  "edit.form.title": "编辑上游"
+}

@@ -1,0 +1,10 @@
+{
+  "description": "A Key object holds a representation of asymmetric keys in various formats.",
+  "created": "Key \"{name}\" successfully created!",
+  "updated": "Key \"{name}\" successfully updated!",
+  "deleted": "Key \"{name}\" successfully deleted!",
+  "list.title": "Keys",
+  "detail.title": "Key: {name}",
+  "create.form.title": "New Key",
+  "edit.form.title": "Edit Key"
+}

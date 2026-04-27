@@ -1,0 +1,24 @@
+{
+  "title": "Workspaces",
+  "create": {
+    "title": "New Workspace",
+    "name": "Name",
+    "comment": "Comment"
+  },
+  "edit": {
+    "title": "Edit Workspace: {name}"
+  },
+  "list": {
+    "title": "Workspaces",
+    "empty": {
+      "title": "No Workspaces",
+      "message": "Create a workspace to organize your Kong entities."
+    }
+  },
+  "detail": {
+    "title": "Workspace: {name}"
+  },
+  "created": "Workspace \"{name}\" successfully created!",
+  "updated": "Workspace \"{name}\" successfully updated!",
+  "deleted": "Workspace \"{name}\" successfully deleted!"
+}

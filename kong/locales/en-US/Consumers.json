@@ -1,0 +1,10 @@
+{
+  "description": "Consumers are the end users of a service.",
+  "created": "Consumer \"{name}\" successfully created!",
+  "updated": "Consumer \"{name}\" successfully updated!",
+  "deleted": "Consumer \"{name}\" successfully deleted!",
+  "list.title": "Consumers",
+  "detail.title": "Consumer: {name}",
+  "create.form.title": "New Consumer",
+  "edit.form.title": "Edit Consumer"
+}

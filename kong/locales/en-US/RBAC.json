@@ -1,0 +1,27 @@
+{
+  "title": "RBAC",
+  "roles": {
+    "list.title": "Roles",
+    "detail.title": "Role: {name}",
+    "create.form.title": "New Role",
+    "edit.form.title": "Edit Role",
+    "created": "Role \"{name}\" successfully created!",
+    "updated": "Role \"{name}\" successfully updated!",
+    "deleted": "Role \"{name}\" successfully deleted!"
+  },
+  "users": {
+    "list.title": "Users",
+    "detail.title": "User: {name}",
+    "create.form.title": "New User",
+    "edit.form.title": "Edit User",
+    "created": "User \"{name}\" successfully created!",
+    "updated": "User \"{name}\" successfully updated!",
+    "deleted": "User \"{name}\" successfully deleted!"
+  },
+  "permissions": {
+    "title": "Permissions",
+    "endpoint": "Endpoint",
+    "action": "Action",
+    "workspace": "Workspace"
+  }
+}

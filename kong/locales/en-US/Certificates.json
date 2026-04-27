@@ -1,0 +1,10 @@
+{
+  "description": "Certificates handle SSL/TLS termination for encrypted requests.",
+  "created": "Certificate \"{id}\" successfully created!",
+  "updated": "Certificate \"{id}\" successfully updated!",
+  "deleted": "Certificate \"{id}\" successfully deleted!",
+  "list.title": "Certificates",
+  "detail.title": "Certificate: {id}",
+  "create.form.title": "New Certificate",
+  "edit.form.title": "Edit Certificate"
+}

@@ -1,0 +1,10 @@
+{
+  "description": "A Route defines rules to match client requests, and is associated with a Service.",
+  "created": "Route \"{name}\" successfully created!",
+  "updated": "Route \"{name}\" successfully updated!",
+  "deleted": "Route \"{name}\" successfully deleted!",
+  "list.title": "Routes",
+  "detail.title": "Route: {name}",
+  "create.form.title": "New Route",
+  "edit.form.title": "Edit Route"
+}

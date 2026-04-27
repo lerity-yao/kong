@@ -1,0 +1,47 @@
+{
+  "info": {
+    "gateway": {
+      "title": "网关",
+      "edition": "版本类型",
+      "version": "版本号"
+    },
+    "node": {
+      "title": "节点详情",
+      "address": "地址",
+      "hostname": "主机名"
+    },
+    "port": {
+      "title": "端口详情",
+      "port": "Kong Manager 端口",
+      "ssl": "Kong Manager SSL 端口",
+      "proxy": "代理端口",
+      "proxy.ssl": "代理 SSL 端口"
+    },
+    "datastore": {
+      "title": "数据库",
+      "type": "类型",
+      "user": "用户",
+      "host": "主机",
+      "port": "端口",
+      "ssl": "SSL"
+    }
+  },
+  "resource": {
+    "intro": {
+      "title": "简介",
+      "description": "轻量、快速、灵活的云原生 API 网关。"
+    },
+    "start": {
+      "title": "快速开始",
+      "description": "Kong 新手？从基础开始。"
+    },
+    "plugin": {
+      "title": "插件中心",
+      "description": "使用强大的插件扩展 Kong 网关。"
+    },
+    "discuss": {
+      "title": "Kong 社区",
+      "description": "与他人讨论 Kong。"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "copied": "Successfully copied to clipboard",
+  "error": "An error has occurred, please try again",
+  "buttons": {
+    "back": "Back",
+    "edit": "Edit",
+    "save": "Save",
+    "create": "Create"
+  },
+  "learn.more": "Learn more"
+}

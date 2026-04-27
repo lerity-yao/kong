@@ -1,0 +1,10 @@
+{
+  "description": "Gateway Service 实体是您上游服务的抽象，例如数据转换微服务、计费 API 等。",
+  "created": "Gateway Service \"{name}\" 创建成功！",
+  "updated": "Gateway Service \"{name}\" 更新成功！",
+  "deleted": "Gateway Service \"{name}\" 删除成功！",
+  "list.title": "Gateway 服务",
+  "detail.title": "Gateway 服务: {name}",
+  "create.form.title": "新建 Gateway 服务",
+  "edit.form.title": "编辑 Gateway 服务"
+}

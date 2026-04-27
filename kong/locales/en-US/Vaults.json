@@ -1,0 +1,10 @@
+{
+  "description": "Improve the security of your Kong Gateway deployment with centralized secrets.",
+  "created": "Vault \"{name}\" successfully created!",
+  "updated": "Vault \"{name}\" successfully updated!",
+  "deleted": "Vault \"{name}\" successfully deleted!",
+  "list.title": "Vaults",
+  "detail.title": "Vault: {name}",
+  "create.form.title": "New Vault",
+  "edit.form.title": "Edit Vault"
+}

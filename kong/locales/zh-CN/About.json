@@ -1,0 +1,10 @@
+{
+  "title": "关于",
+  "config": {
+    "title": "配置详情",
+    "copy": "复制配置 JSON"
+  },
+  "reference": {
+    "title": "配置参考文档"
+  }
+}

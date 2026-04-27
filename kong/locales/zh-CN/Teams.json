@@ -1,0 +1,13 @@
+{
+  "title": "团队",
+  "users": {
+    "list.title": "用户",
+    "create.form.title": "新建用户",
+    "edit.form.title": "编辑用户"
+  },
+  "roles": {
+    "list.title": "角色",
+    "create.form.title": "新建角色",
+    "edit.form.title": "编辑角色"
+  }
+}

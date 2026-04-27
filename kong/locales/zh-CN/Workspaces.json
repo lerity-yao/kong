@@ -1,0 +1,24 @@
+{
+  "title": "工作空间",
+  "create": {
+    "title": "新建工作空间",
+    "name": "名称",
+    "comment": "备注"
+  },
+  "edit": {
+    "title": "编辑工作空间: {name}"
+  },
+  "list": {
+    "title": "工作空间",
+    "empty": {
+      "title": "暂无工作空间",
+      "message": "创建工作空间以组织您的 Kong 实体。"
+    }
+  },
+  "detail": {
+    "title": "工作空间: {name}"
+  },
+  "created": "工作空间 \"{name}\" 创建成功！",
+  "updated": "工作空间 \"{name}\" 更新成功！",
+  "deleted": "工作空间 \"{name}\" 删除成功！"
+}

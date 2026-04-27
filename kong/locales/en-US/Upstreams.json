@@ -1,0 +1,10 @@
+{
+  "description": "An Upstream represents a virtual hostname and can be used to load balance incoming requests over multiple Services.",
+  "created": "Upstream \"{name}\" successfully created!",
+  "updated": "Upstream \"{name}\" successfully updated!",
+  "deleted": "Upstream \"{name}\" successfully deleted!",
+  "list.title": "Upstreams",
+  "detail.title": "Upstream: {name}",
+  "create.form.title": "New Upstream",
+  "edit.form.title": "Edit Upstream"
+}

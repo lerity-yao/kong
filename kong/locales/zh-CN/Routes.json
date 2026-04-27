@@ -1,0 +1,10 @@
+{
+  "description": "路由定义了匹配客户端请求的规则，并与服务关联。",
+  "created": "路由 \"{name}\" 创建成功！",
+  "updated": "路由 \"{name}\" 更新成功！",
+  "deleted": "路由 \"{name}\" 删除成功！",
+  "list.title": "路由",
+  "detail.title": "路由: {name}",
+  "create.form.title": "新建路由",
+  "edit.form.title": "编辑路由"
+}

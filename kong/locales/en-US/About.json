@@ -1,0 +1,10 @@
+{
+  "title": "About",
+  "config": {
+    "title": "Config Details",
+    "copy": "Copy Config JSON"
+  },
+  "reference": {
+    "title": "Config Reference Docs"
+  }
+}

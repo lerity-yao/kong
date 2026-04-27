@@ -1,0 +1,11 @@
+{
+  "copied": "已成功复制到剪贴板",
+  "error": "发生错误，请重试",
+  "buttons": {
+    "back": "返回",
+    "edit": "编辑",
+    "save": "保存",
+    "create": "创建"
+  },
+  "learn.more": "了解更多"
+}

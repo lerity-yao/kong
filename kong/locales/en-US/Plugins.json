@@ -1,0 +1,11 @@
+{
+  "description": "Plugins allow you to extend Kong's capabilities with features like rate limiting, authentication, and logging.",
+  "created": "Plugin \"{name}\" successfully created!",
+  "updated": "Plugin \"{name}\" successfully updated!",
+  "deleted": "Plugin \"{name}\" successfully deleted!",
+  "enabled": "Plugin \"{name}\" successfully enabled!",
+  "disabled": "Plugin \"{name}\" successfully disabled!",
+  "list.title": "Plugins",
+  "create.form.title": "New Plugin",
+  "edit.form.title": "Edit Plugin"
+}

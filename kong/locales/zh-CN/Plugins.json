@@ -1,0 +1,11 @@
+{
+  "description": "插件允许您通过限流、认证、日志等功能扩展 Kong 的能力。",
+  "created": "插件 \"{name}\" 创建成功！",
+  "updated": "插件 \"{name}\" 更新成功！",
+  "deleted": "插件 \"{name}\" 删除成功！",
+  "enabled": "插件 \"{name}\" 启用成功！",
+  "disabled": "插件 \"{name}\" 禁用成功！",
+  "list.title": "插件",
+  "create.form.title": "新建插件",
+  "edit.form.title": "编辑插件"
+}

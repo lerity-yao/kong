@@ -1,0 +1,10 @@
+{
+  "description": "密钥对象以各种格式保存非对称密钥的表示。",
+  "created": "密钥 \"{name}\" 创建成功！",
+  "updated": "密钥 \"{name}\" 更新成功！",
+  "deleted": "密钥 \"{name}\" 删除成功！",
+  "list.title": "密钥",
+  "detail.title": "密钥: {name}",
+  "create.form.title": "新建密钥",
+  "edit.form.title": "编辑密钥"
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Teams",
+  "users": {
+    "list.title": "Users",
+    "create.form.title": "New User",
+    "edit.form.title": "Edit User"
+  },
+  "roles": {
+    "list.title": "Roles",
+    "create.form.title": "New Role",
+    "edit.form.title": "Edit Role"
+  }
+}
