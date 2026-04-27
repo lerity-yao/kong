@@ -1,0 +1,10 @@
+{
+  "description": "CA 证书用于验证客户端或服务器证书。",
+  "created": "CA 证书 \"{id}\" 创建成功！",
+  "updated": "CA 证书 \"{id}\" 更新成功！",
+  "deleted": "CA 证书 \"{id}\" 删除成功！",
+  "list.title": "CA 证书",
+  "detail.title": "CA 证书: {id}",
+  "create.form.title": "新建 CA 证书",
+  "edit.form.title": "编辑 CA 证书"
+}

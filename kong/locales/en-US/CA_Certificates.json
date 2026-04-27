@@ -1,0 +1,10 @@
+{
+  "description": "CA certificates validate client or server certificates.",
+  "created": "CA Certificate \"{id}\" successfully created!",
+  "updated": "CA Certificate \"{id}\" successfully updated!",
+  "deleted": "CA Certificate \"{id}\" successfully deleted!",
+  "list.title": "CA Certificates",
+  "detail.title": "CA Certificate: {id}",
+  "create.form.title": "New CA Certificate",
+  "edit.form.title": "Edit CA Certificate"
+}

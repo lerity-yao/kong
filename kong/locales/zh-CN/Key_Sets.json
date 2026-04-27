@@ -1,0 +1,10 @@
+{
+  "description": "密钥集对象包含一组非对称密钥对象。",
+  "created": "密钥集 \"{name}\" 创建成功！",
+  "updated": "密钥集 \"{name}\" 更新成功！",
+  "deleted": "密钥集 \"{name}\" 删除成功！",
+  "list.title": "密钥集",
+  "detail.title": "密钥集: {name}",
+  "create.form.title": "新建密钥集",
+  "edit.form.title": "编辑密钥集"
+}

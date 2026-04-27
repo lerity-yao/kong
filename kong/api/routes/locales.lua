@@ -9,20 +9,23 @@ local SUPPORTED_LOCALES = {
 }
 
 local SUPPORTED_MODULES = {
-  Global         = true,
-  Workspaces     = true,
-  Overview       = true,
-  About          = true,
-  Services       = true,
-  Routes         = true,
-  Consumers      = true,
-  Plugins        = true,
-  Upstreams      = true,
-  Certificates   = true,
-  Vaults         = true,
-  Keys           = true,
-  Teams          = true,
-  RBAC          = true,
+  Global           = true,
+  Workspaces       = true,
+  Overview         = true,
+  About            = true,
+  Services         = true,
+  Routes           = true,
+  Consumers        = true,
+  Plugins          = true,
+  Upstreams        = true,
+  Certificates     = true,
+  CA_Certificates  = true,
+  SNIs             = true,
+  Vaults           = true,
+  Keys             = true,
+  Key_Sets         = true,
+  Teams            = true,
+  RBAC             = true,
 }
 
 

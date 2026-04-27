@@ -3,20 +3,69 @@
   "create": {
     "title": "New Workspace",
     "name": "Name",
-    "comment": "Comment"
+    "name_placeholder": "my-workspace",
+    "comment": "Comment",
+    "comment_placeholder": "Optional description",
+    "failed": "Failed to create workspace",
+    "section": {
+      "general": "General Information",
+      "general.description": "General information will help identify and manage this workspace."
+    }
   },
   "edit": {
     "title": "Edit Workspace: {name}"
   },
   "list": {
     "title": "Workspaces",
+    "new": "New Workspace",
+    "filter": "Filter Workspaces",
     "empty": {
       "title": "No Workspaces",
       "message": "Create a workspace to organize your Kong entities."
+    },
+    "headers": {
+      "name": "Workspace Name",
+      "comment": "Comment",
+      "services": "Gateway Services",
+      "consumers": "Consumers",
+      "routes": "Routes",
+      "created_at": "Created At",
+      "updated_at": "Updated At"
     }
   },
   "detail": {
-    "title": "Workspace: {name}"
+    "title": "Workspace: {name}",
+    "tabs": {
+      "overview": "Overview",
+      "entities": "Entities"
+    },
+    "summary": {
+      "title": "Summary",
+      "services": "Services",
+      "routes": "Routes",
+      "consumers": "Consumers",
+      "plugins": "Plugins",
+      "api_requests": "API Requests",
+      "tooltip": {
+        "services": "The total number of Gateway Services configured in this workspace.",
+        "routes": "The total number of Routes configured in this workspace.",
+        "consumers": "The total number of Consumers configured in this workspace.",
+        "plugins": "The total number of unique Plugin configurations in this workspace.",
+        "api_requests": "The total number of API requests proxied by the Kong node. (Enterprise only)",
+        "services_global": "The total number of Gateway Services configured in the Kong node.",
+        "routes_global": "The total number of Routes configured in the Kong node.",
+        "consumers_global": "The total number of Consumers configured in the Kong node.",
+        "plugins_global": "The total number of unique Plugin configurations in the Kong node."
+      }
+    },
+    "info": {
+      "title": "Workspace Information",
+      "id": "ID",
+      "name": "Name",
+      "comment": "Comment",
+      "created": "Created"
+    },
+    "entities_hint": "Workspace entities are accessible via the sidebar menu when this workspace is selected."
   },
   "created": "Workspace \"{name}\" successfully created!",
   "updated": "Workspace \"{name}\" successfully updated!",

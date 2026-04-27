@@ -1,0 +1,10 @@
+{
+  "description": "SNI 对象表示主机名到证书的多对一映射。",
+  "created": "SNI \"{name}\" 创建成功！",
+  "updated": "SNI \"{name}\" 更新成功！",
+  "deleted": "SNI \"{name}\" 删除成功！",
+  "list.title": "SNI",
+  "detail.title": "SNI: {name}",
+  "create.form.title": "新建 SNI",
+  "edit.form.title": "编辑 SNI"
+}

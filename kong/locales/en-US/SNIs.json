@@ -1,0 +1,10 @@
+{
+  "description": "An SNI object represents a many-to-one mapping of hostnames to a certificate.",
+  "created": "SNI \"{name}\" successfully created!",
+  "updated": "SNI \"{name}\" successfully updated!",
+  "deleted": "SNI \"{name}\" successfully deleted!",
+  "list.title": "SNIs",
+  "detail.title": "SNI: {name}",
+  "create.form.title": "New SNI",
+  "edit.form.title": "Edit SNI"
+}

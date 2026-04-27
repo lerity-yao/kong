@@ -27,6 +27,7 @@
     }
   },
   "resource": {
+    "title": "Resources",
     "intro": {
       "title": "Introduction",
       "description": "A lightweight, fast, and flexible cloud-native API gateway."

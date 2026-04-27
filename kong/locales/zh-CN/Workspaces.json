@@ -3,20 +3,69 @@
   "create": {
     "title": "新建工作空间",
     "name": "名称",
-    "comment": "备注"
+    "name_placeholder": "my-workspace",
+    "comment": "备注",
+    "comment_placeholder": "可选描述",
+    "failed": "创建工作空间失败",
+    "section": {
+      "general": "基本信息",
+      "general.description": "基本信息将帮助识别和管理此工作空间。"
+    }
   },
   "edit": {
     "title": "编辑工作空间: {name}"
   },
   "list": {
     "title": "工作空间",
+    "new": "新建工作空间",
+    "filter": "筛选工作空间",
     "empty": {
       "title": "暂无工作空间",
       "message": "创建工作空间以组织您的 Kong 实体。"
+    },
+    "headers": {
+      "name": "工作空间名称",
+      "comment": "备注",
+      "services": "Gateway 服务",
+      "consumers": "消费者",
+      "routes": "路由",
+      "created_at": "创建时间",
+      "updated_at": "更新时间"
     }
   },
   "detail": {
-    "title": "工作空间: {name}"
+    "title": "工作空间: {name}",
+    "tabs": {
+      "overview": "概览",
+      "entities": "实体"
+    },
+    "summary": {
+      "title": "摘要",
+      "services": "服务",
+      "routes": "路由",
+      "consumers": "消费者",
+      "plugins": "插件",
+      "api_requests": "API 请求数",
+      "tooltip": {
+        "services": "此工作空间中配置的 Gateway 服务总数。",
+        "routes": "此工作空间中配置的路由总数。",
+        "consumers": "此工作空间中配置的消费者总数。",
+        "plugins": "此工作空间中唯一的插件配置总数。",
+        "api_requests": "Kong 节点代理的 API 请求总数。（仅企业版）",
+        "services_global": "Kong 节点中配置的 Gateway 服务总数。",
+        "routes_global": "Kong 节点中配置的路由总数。",
+        "consumers_global": "Kong 节点中配置的消费者总数。",
+        "plugins_global": "Kong 节点中唯一的插件配置总数。"
+      }
+    },
+    "info": {
+      "title": "工作空间信息",
+      "id": "ID",
+      "name": "名称",
+      "comment": "备注",
+      "created": "创建时间"
+    },
+    "entities_hint": "选择此工作空间后，可通过侧边栏菜单访问工作空间实体。"
   },
   "created": "工作空间 \"{name}\" 创建成功！",
   "updated": "工作空间 \"{name}\" 更新成功！",

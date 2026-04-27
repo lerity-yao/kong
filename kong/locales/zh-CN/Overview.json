@@ -27,6 +27,7 @@
     }
   },
   "resource": {
+    "title": "资源",
     "intro": {
       "title": "简介",
       "description": "轻量、快速、灵活的云原生 API 网关。"

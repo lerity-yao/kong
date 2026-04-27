@@ -1,0 +1,10 @@
+{
+  "description": "A Key Set object holds a collection of asymmetric key objects.",
+  "created": "Key Set \"{name}\" successfully created!",
+  "updated": "Key Set \"{name}\" successfully updated!",
+  "deleted": "Key Set \"{name}\" successfully deleted!",
+  "list.title": "Key Sets",
+  "detail.title": "Key Set: {name}",
+  "create.form.title": "New Key Set",
+  "edit.form.title": "Edit Key Set"
+}
