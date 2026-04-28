@@ -29,10 +29,28 @@ assert(hooks.run_hook("api:init:pre", app))
 ngx.log(ngx.DEBUG, "Loading Admin API endpoints")
 
 
--- Load core routes
+-- Load core routes and generate workspace-prefixed versions
+-- Enterprise Kong: /{workspace}/kong, /{workspace}/schemas/... all work
+-- OSS Kong: we generate /workspaces/:workspaces/kong, /workspaces/:workspaces/schemas/... etc.
 for _, v in ipairs({"kong", "health", "cache", "config", "debug", "locales", }) do
   local routes = require("kong.api.routes." .. v)
   api_helpers.attach_routes(app, routes)
+
+  -- Generate workspace-prefixed versions of core routes
+  -- e.g. "/" → "/workspaces/:workspaces/"
+  --       "/schemas/plugins/:name" → "/workspaces/:workspaces/schemas/plugins/:name"
+  -- This mirrors enterprise Kong's workspace routing behavior
+  local ws_core_routes = {}
+  for route_pattern, route_data in pairs(routes) do
+    if type(route_data) == "table" then
+      local ws_pattern = "/workspaces/:workspaces" .. route_pattern
+      -- Skip if this route already exists
+      if not routes[ws_pattern] then
+        ws_core_routes[ws_pattern] = route_data
+      end
+    end
+  end
+  api_helpers.attach_routes(app, ws_core_routes)
 end
 
 
@@ -122,14 +140,14 @@ do
     end
   end
 
-  -- Generate workspace-prefixed routes for ALL entities
-  -- e.g. /services → /workspaces/:workspaces/services
-  --       /services/:services → /workspaces/:workspaces/services/:services
+  -- Generate workspace-prefixed routes for ALL routes (not just schema routes)
+  -- Enterprise Kong supports /{workspace}/{entity} for every endpoint
+  -- OSS needs the same: /workspaces/:workspaces/services, /workspaces/:workspaces/kong, etc.
   -- workspaceable entities: filtered by ws_id (data isolation)
-  -- non-workspaceable entities (ca_certificates, etc.): return global data (no ws_id filter)
+  -- non-workspaceable entities & non-schema routes (kong info, schemas): return global data
   local ws_entity_routes = {}
   for route_pattern, route_data in pairs(routes) do
-    if type(route_data) == "table" and route_data.schema then
+    if type(route_data) == "table" then
       local ws_pattern = "/workspaces/:workspaces" .. route_pattern
       -- Skip if this route already exists (avoid overwriting workspace CRUD routes)
       if not routes[ws_pattern] and not ws_entity_routes[ws_pattern] then

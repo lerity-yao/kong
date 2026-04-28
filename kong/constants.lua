@@ -43,7 +43,8 @@ local plugins = {
   "ai-request-transformer",
   "ai-response-transformer",
   "standard-webhooks",
-  "redirect"
+  "redirect",
+  "jwt-claims-header"
 }
 
 local plugin_map = {}
