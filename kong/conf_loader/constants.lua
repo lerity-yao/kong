@@ -571,6 +571,12 @@ local CONF_PARSERS = {
   admin_gui_api_url = { typ = "string" },
   admin_gui_csp_header = { typ = "boolean" },
 
+  enforce_rbac = { typ = "boolean" },
+  admin_gui_auth = { enum = { "basic-auth" } },
+  admin_gui_session_conf = { typ = "string" },
+  rbac_user_token_auto = { typ = "boolean" },
+  admin_gui_default_password = { typ = "string" },
+
   request_debug = { typ = "boolean" },
   request_debug_token = { typ = "string" },
 }
@@ -592,6 +598,8 @@ local CONF_SENSITIVE = {
   admin_gui_ssl_cert_key = true,
   status_ssl_cert_key = true,
   debug_ssl_cert_key = true,
+  admin_gui_session_conf = true,  -- contains secret
+  admin_gui_default_password = true,  -- password for initial admin
   ["$refs"] = true, -- for internal use only, no need to log
 }
 

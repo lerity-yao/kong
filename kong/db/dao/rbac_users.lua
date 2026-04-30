@@ -1,0 +1,3 @@
+local RbacUsers = {}
+
+return RbacUsers

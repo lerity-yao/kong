@@ -3,6 +3,7 @@ local reports = require "kong.reports"
 local endpoints = require "kong.api.endpoints"
 local arguments = require "kong.api.arguments"
 local api_helpers = require "kong.api.api_helpers"
+local workspaces = require "kong.workspaces"
 local cycle_aware_deep_copy = require("kong.tools.table").cycle_aware_deep_copy
 
 
@@ -110,13 +111,60 @@ local function patch_plugin(self, db, _, parent)
 end
 
 
+local function enrich_plugin_foreign_keys(plugin, db)
+  -- Enrich service with name
+  if plugin.service and type(plugin.service) == "table" and plugin.service.id then
+    local svc, _ = db.services:select({ id = plugin.service.id }, { workspace = workspaces.get_workspace_id() })
+    if svc then
+      plugin.service.name = svc.name
+    end
+  end
+
+  -- Enrich route with name
+  if plugin.route and type(plugin.route) == "table" and plugin.route.id then
+    local rte, _ = db.routes:select({ id = plugin.route.id }, { workspace = workspaces.get_workspace_id() })
+    if rte then
+      plugin.route.name = rte.name
+    end
+  end
+
+  -- Enrich consumer with username
+  if plugin.consumer and type(plugin.consumer) == "table" and plugin.consumer.id then
+    local con, _ = db.consumers:select({ id = plugin.consumer.id }, { workspace = workspaces.get_workspace_id() })
+    if con then
+      plugin.consumer.username = con.username
+    end
+  end
+end
+
+
+local function get_plugin_with_names(self, db, helpers, parent)
+  -- Override default GET handler to enrich foreign key references with names
+  local plugin, _, err_t = endpoints.select_entity(self, db, db.plugins.schema)
+  if err_t then
+    return endpoints.handle_error(err_t)
+  end
+
+  if not plugin then
+    return kong.response.exit(404, { message = "Not found" })
+  end
+
+  enrich_plugin_foreign_keys(plugin, db)
+
+  return kong.response.exit(200, plugin)
+end
+
+
+
+
 return {
   ["/plugins"] = {
     POST = post_plugin,
   },
 
   ["/plugins/:plugins"] = {
-    PATCH = patch_plugin
+    GET = get_plugin_with_names,
+    PATCH = patch_plugin,
   },
 
   ["/plugins/schema/:name"] = {

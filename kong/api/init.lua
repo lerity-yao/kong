@@ -54,6 +54,13 @@ for _, v in ipairs({"kong", "health", "cache", "config", "debug", "locales", }) 
 end
 
 
+-- Load RBAC and Auth routes (no workspace prefix needed)
+for _, v in ipairs({"rbac", "auth"}) do
+  local routes = require("kong.api.routes." .. v)
+  api_helpers.attach_routes(app, routes)
+end
+
+
 -- Load custom DB routes
 for _, v in ipairs({"clustering", }) do
   local routes = require("kong.api.routes." .. v)

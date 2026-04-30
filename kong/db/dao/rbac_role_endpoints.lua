@@ -1,0 +1,3 @@
+local RbacRoleEndpoints = {}
+
+return RbacRoleEndpoints

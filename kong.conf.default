@@ -2086,6 +2086,43 @@
 
 
 #------------------------------------------------------------------------------
+# RBAC (Role-Based Access Control)
+#------------------------------------------------------------------------------
+
+enforce_rbac = off
+                        # Enable or disable RBAC authentication for the
+                        # Admin API and Kong Manager.
+                        # When enabled, all requests must be authenticated
+                        # via session cookie or `Kong-Admin-Token` header.
+                        # Set to `on` to enforce RBAC.
+
+admin_gui_auth = basic-auth
+                        # Authentication plugin for Kong Manager.
+                        # Currently only `basic-auth` is supported,
+                        # which authenticates admins by username/password
+                        # and creates a session cookie via lua-resty-session.
+
+admin_gui_session_conf = {"secret":"change-me","cookie_lifetime":86400}
+                        # Session configuration for Kong Manager (JSON string).
+                        # Must include a `secret` key for encrypting session data.
+                        # `cookie_lifetime` sets the session duration in seconds.
+                        # This is passed to lua-resty-session.
+                        # IMPORTANT: Change the secret in production!
+
+#rbac_user_token_auto = on
+                        # Automatically generate a user_token when creating
+                        # an RBAC user without providing one.
+                        # Set to `off` to require explicit user_token.
+
+admin_gui_default_password = admin
+                        # Default password for the initial super-admin user
+                        # created during RBAC database migration.
+                        # Only used once during the first `kong migrations up`.
+                        # IMPORTANT: Change this in production for security!
+                        # After migration, change passwords via the Admin API.
+
+
+#------------------------------------------------------------------------------
 # WEBASSEMBLY (WASM)
 #------------------------------------------------------------------------------
 

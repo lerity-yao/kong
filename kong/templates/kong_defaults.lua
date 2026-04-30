@@ -227,4 +227,10 @@ wasm_filters = bundled,user
 
 request_debug = on
 request_debug_token =
+
+enforce_rbac = off
+admin_gui_auth = basic-auth
+admin_gui_session_conf = {"secret":"change-me","cookie_lifetime":86400}
+rbac_user_token_auto = on
+admin_gui_default_password = admin
 ]]

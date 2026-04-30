@@ -153,6 +153,12 @@ local constants = {
     "key_sets",
     "keys",
     "filter_chains",
+    "rbac_users",
+    "rbac_roles",
+    "rbac_role_endpoints",
+    "rbac_role_entities",
+    "rbac_groups",
+    "admins",
   },
   ENTITY_CACHE_STORE = setmetatable({
     consumers = "cache",
@@ -168,6 +174,12 @@ local constants = {
     vaults = "core_cache",
     key_sets = "core_cache",
     keys = "core_cache",
+    rbac_users = "cache",
+    rbac_roles = "cache",
+    rbac_role_endpoints = "cache",
+    rbac_role_entities = "cache",
+    rbac_groups = "cache",
+    admins = "cache",
   }, {
     __index = function()
       return "cache"

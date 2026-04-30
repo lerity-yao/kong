@@ -298,6 +298,11 @@ function _M.before_filter(self)
 end
 
 function _M.cors_filter(self)
+  -- Always set CORS headers first, even before auth check.
+  -- If we set CORS after auth and auth fails (401/403),
+  -- the browser blocks the response entirely due to missing
+  -- Access-Control-Allow-Credentials, which causes confusing
+  -- CORS errors instead of proper auth errors.
   local allowed_origins = kong.configuration.admin_gui_origin
 
   local function is_origin_allowed(req_origin)
@@ -327,6 +332,18 @@ function _M.cors_filter(self)
     if request_allow_headers then
       ngx.header["Access-Control-Allow-Headers"] = request_allow_headers
     end
+    -- Preflight requests must return 200 without auth check.
+    -- If we continue to rbac_auth_filter, a 401/403 would fail the
+    -- preflight, causing CORS errors in the browser.
+    ngx.header["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    ngx.header["Access-Control-Max-Age"] = "86400"
+    return kong.response.exit(200, "OK")
+  end
+
+  -- RBAC authentication check (CORS headers are already set above)
+  local rbac_ok, rbac_err = _M.rbac_auth_filter(self)
+  if not rbac_ok then
+    return rbac_err
   end
 end
 
@@ -596,6 +613,276 @@ function _M.is_new_db_routes(routes)
       return verbs.schema
     end
   end
+end
+
+
+-- RBAC whitelist: paths that bypass authentication even when enforce_rbac=on
+local RBAC_WHITELIST = {
+  [""]             = true,  -- matches / after trailing-slash strip
+  ["/"]             = true,
+  ["/auth/login"]    = true,
+  ["/auth/logout"]   = true,
+  ["/auth/token"]    = true,
+  ["/auth/me"]           = true,
+  ["/auth/permissions"]  = true,
+  ["/admins/register"] = true,
+}
+
+
+-- Map HTTP method to RBAC action
+local METHOD_TO_ACTION = {
+  GET    = "read",
+  HEAD   = "read",
+  OPTIONS = "read",
+  POST   = "create",
+  PUT    = "update",
+  PATCH  = "update",
+  DELETE = "delete",
+}
+
+
+--- RBAC authentication and authorization filter.
+-- Checks enforce_rbac config; if on, validates session/token
+-- and checks endpoint-level and entity-level permissions.
+-- @return true if OK, nil + error_response if denied
+function _M.rbac_auth_filter(self)
+  -- Skip if RBAC is not enforced
+  if not kong.configuration.enforce_rbac then
+    return true
+  end
+
+  -- Whitelist check
+  local path = ngx.var.uri
+  -- Strip query string and trailing slashes for matching
+  local clean_path = path:match("^([^?]+)") or path
+  clean_path = clean_path:gsub("/+$", "")
+  if RBAC_WHITELIST[clean_path] then
+    return true
+  end
+
+  -- Also whitelist /kong endpoint (version info, read-only)
+  if clean_path == "/kong" or clean_path == "/kong/" then
+    return true
+  end
+
+  -- Whitelist /locales/* (i18n files, no auth needed)
+  if clean_path:match("^/locales/") then
+    return true
+  end
+
+  -- Try session-based auth first
+  local session = require "resty.session"
+  local conf_str = kong.configuration.admin_gui_session_conf
+  local ok, conf = pcall(require "cjson.safe".new().decode, conf_str or "")
+  if not ok then conf = {} end
+  if type(conf) ~= "table" then conf = {} end
+
+  local s = session.new({
+    cookie_name = "session",
+    secret = conf.secret or "kong",
+    audience = "default",
+    cookie_path = "/",
+    cookie_http_only = true,
+    cookie_same_site = "Lax",
+    cookie_lifetime = conf.cookie_lifetime or 86400,
+  })
+  local session_ok, session_err = s:open()
+  -- Get user data from session: data[data_index][1] holds the actual user data
+  local user_data = s.data and s.data[s.data_index] and s.data[s.data_index][1]
+  local user_id = user_data and user_data.id
+  -- IMPORTANT: Always re-fetch roles from DB, not from session.
+  -- Session stores a login-time snapshot which can become stale
+  -- if an admin changes the user's role assignment.
+  local user_roles = {}
+  local user_type = nil
+  if user_id then
+    user_type = user_data.user_type
+    if user_type == "admin" then
+      local role_res = kong.db.connector:query(
+        string.format(
+          [[SELECT r.id, r.name FROM rbac_roles r
+            JOIN admin_roles ar ON ar.role_id = r.id
+            WHERE ar.admin_id = '%s'::uuid]],
+          user_id
+        ),
+        "read"
+      )
+      user_roles = role_res or {}
+    elseif user_type == "rbac_user" then
+      local role_res = kong.db.connector:query(
+        string.format(
+          [[SELECT r.id, r.name FROM rbac_roles r
+            JOIN rbac_user_roles ur ON ur.role_id = r.id
+            WHERE ur.user_id = '%s'::uuid]],
+          user_id
+        ),
+        "read"
+      )
+      user_roles = role_res or {}
+    end
+  end
+
+  -- Fallback: check Kong-Admin-Token header
+  if not user_id then
+    local token = kong.request.get_header("Kong-Admin-Token")
+    if token and token ~= "" then
+      -- Look up rbac_user by token
+      local res, err = kong.db.connector:query(
+        string.format(
+          [[SELECT id, name FROM rbac_users WHERE user_token = '%s' AND enabled = true LIMIT 1]],
+          token:gsub("'", "''")
+        ),
+        "read"
+      )
+      if res and #res > 0 then
+        user_id = res[1].id
+        user_type = "rbac_user"
+        -- Get roles for this rbac_user
+        local role_res, _ = kong.db.connector:query(
+          string.format(
+            [[SELECT r.id, r.name FROM rbac_roles r
+              JOIN rbac_user_roles ur ON ur.role_id = r.id
+              WHERE ur.user_id = '%s'::uuid]],
+            user_id
+          ),
+          "read"
+        )
+        user_roles = role_res or {}
+      end
+    end
+  end
+
+  -- No authentication found
+  if not user_id then
+    return nil, kong.response.exit(401, { message = "Unauthorized" })
+  end
+
+  -- Admin users (logged in via session) bypass endpoint permission checks.
+  -- Only rbac_user (token-based access) is subject to fine-grained endpoint auth.
+  -- This matches enterprise Kong behavior where super-admins have unrestricted access.
+  if user_type == "admin" then
+    return true
+  end
+
+  -- Authorization: check endpoint-level permissions
+  local method = ngx.req.get_method()
+  local action = METHOD_TO_ACTION[method] or "read"
+
+  -- Derive the current workspace name from the request path
+  -- e.g. /workspaces/default/services → "default"
+  local current_ws = "*"
+  local ws_name = clean_path:match("^/workspaces/([^/]+)/")
+  if ws_name then
+    current_ws = ws_name
+  end
+
+  -- Build the path to check for endpoint matching.
+  -- If the request is under a workspace prefix (e.g. /workspaces/default/services),
+  -- we ONLY use the workspace-stripped path (/services) for matching.
+  -- This prevents /workspaces/* from matching sub-resource paths like
+  -- /workspaces/default/services — workspace-viewer should only see workspace
+  -- entities, not all resources within every workspace.
+  -- If there is no workspace prefix, use the full path as-is.
+  local check_path
+  local stripped = clean_path:match("^/workspaces/[^/]+/(.+)$")
+  if stripped then
+    check_path = "/" .. stripped
+  else
+    check_path = clean_path
+  end
+  local check_paths = { check_path }
+
+  -- Collect all matching rules across all roles, then evaluate
+  local has_positive = false
+  local has_negative = false
+
+  for _, role in ipairs(user_roles) do
+    local role_id = role.id
+    if role_id then
+      local eps, _ = kong.db.connector:query(
+        string.format(
+          [[SELECT endpoint, actions, negative, workspace FROM rbac_role_endpoints WHERE role_id = '%s'::uuid]],
+          role_id
+        ),
+        "read"
+      )
+      if eps then
+        for _, ep in ipairs(eps) do
+          local endpoint = ep.endpoint
+          local actions = ep.actions or {"*"}
+          local negative = ep.negative
+          local ws = ep.workspace or "*"
+
+          -- Check workspace scope: "*" matches all, otherwise must match current
+          if ws == "*" or ws == current_ws then
+            -- Convert endpoint pattern to Lua patterns
+            -- NOTE: Lua patterns do NOT support ? quantifier or | alternation.
+            -- Trailing /* means "this endpoint and everything below"
+            --   e.g. /services/* must match /services, /services/abc, /services/abc/routes
+            --   We generate TWO patterns: base path + base path with sub-paths
+            -- Middle * means "any single path segment"
+            --   e.g. /services/*/routes → ^/services/[^/]+/routes$
+            local patterns = {}
+            if endpoint == "*" then
+              patterns = { ".*" }
+            elseif endpoint:sub(-2) == "/*" then
+              -- Trailing /*: generate two patterns
+              local base = endpoint:sub(1, -3)
+              base = base:gsub("%*", "[^/]+")
+              patterns = {
+                "^" .. base .. "$",       -- matches the base path itself (e.g. /services)
+                "^" .. base .. "/.*$",     -- matches sub-paths (e.g. /services/abc)
+              }
+            else
+              patterns = { "^" .. endpoint:gsub("%*", "[^/]+") .. "$" }
+            end
+
+            -- Check if any check_path matches any pattern
+            local matched = false
+            for _, cp in ipairs(check_paths) do
+              for _, pat in ipairs(patterns) do
+                if cp:match(pat) then
+                  matched = true
+                  break
+                end
+              end
+              if matched then break end
+            end
+
+            if matched then
+              -- Check if action is allowed
+              local action_match = false
+              for _, a in ipairs(actions) do
+                if a == "*" or a == action then
+                  action_match = true
+                  break
+                end
+              end
+
+              if action_match then
+                if negative then
+                  has_negative = true
+                else
+                  has_positive = true
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  -- Evaluate: negative rules take precedence over positive
+  if has_negative then
+    return nil, kong.response.exit(403, { message = "Forbidden" })
+  end
+
+  if not has_positive then
+    return nil, kong.response.exit(403, { message = "Forbidden" })
+  end
+
+  return true
 end
 
 
