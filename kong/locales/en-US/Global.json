@@ -5,7 +5,9 @@
     "back": "Back",
     "edit": "Edit",
     "save": "Save",
-    "create": "Create"
+    "create": "Create",
+    "cancel": "Cancel",
+    "delete": "Delete"
   },
   "learn.more": "Learn more"
 }

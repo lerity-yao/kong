@@ -1,0 +1,84 @@
+{
+  "title": "API Docs",
+  "list": {
+    "title": "API Docs",
+    "new": "Add API Doc",
+    "filter": "Filter API Docs",
+    "search_name": "Search by name",
+    "search_name_placeholder": "Enter doc name",
+    "workspace": "Workspace",
+    "workspace_all": "All Workspaces",
+    "empty": {
+      "title": "No API Docs",
+      "message": "Upload a Swagger spec to associate with your backend service APIs."
+    },
+    "headers": {
+      "name": "Name",
+      "version": "Current Version",
+      "service": "Associated Service",
+      "workspace": "Workspace",
+      "created_at": "Created",
+      "actions": "Actions"
+    }
+  },
+  "detail": {
+    "title": "API Doc: {name}",
+    "version": "Version",
+    "no_service": "No associated service",
+    "view_service": "View Service",
+    "debug_mode": "Debug Mode",
+    "debug_gateway": "Via Gateway",
+    "debug_direct": "Direct",
+    "debug_direct_tooltip": "Connect directly to backend, bypassing Kong gateway",
+    "custom_headers": "Custom Headers",
+    "add_header": "Add Header",
+    "path_filtered": "Filtered to match current route",
+    "matched_paths": "Matched {count} endpoints",
+    "no_matched_paths": "No matching endpoints found"
+  },
+  "upload": {
+    "title": "Upload API Doc",
+    "workspace": "Workspace",
+    "file": "Choose File",
+    "file_hint": "Supports Swagger 2.0 in .json format",
+    "service": "Associate Service",
+    "service_placeholder": "Select a service (optional)",
+    "name": "Doc Name",
+    "name_auto": "Auto-generated when service is selected",
+    "preview": "Preview",
+    "preview_title": "Title",
+    "preview_version": "Version",
+    "preview_paths": "Endpoints",
+    "drag_hint": "Drag a file here, or click to upload",
+    "invalid_file": "Invalid Swagger file format, please upload a .json file"
+  },
+  "versions": {
+    "title": "Version History",
+    "current": "Current",
+    "switch_to": "Switch to this version",
+    "delete": "Delete version",
+    "delete_all": "Delete all versions",
+    "delete_confirm": "Are you sure you want to delete this version?",
+    "version_deleted": "Version {version} deleted",
+    "delete_failed": "Failed to delete version"
+  },
+  "edit": {
+    "title": "Edit API Doc"
+  },
+  "created": "API doc \"{name}\" created successfully!",
+  "updated": "API doc \"{name}\" updated successfully!",
+  "deleted": "API doc \"{name}\" deleted successfully!",
+  "delete_confirm_title": "Delete API Doc",
+  "delete_confirm_body": "This action cannot be undone. Are you sure you want to delete API doc {name}?",
+  "delete_type_confirm": "Type {name} to confirm:",
+  "load_failed": "Failed to load API docs",
+  "create_failed": "Failed to create API doc",
+  "update_failed": "Failed to update API doc",
+  "delete_failed": "Failed to delete API doc",
+  "tab": {
+    "no_docs": "No API docs associated with this resource",
+    "select_doc": "Select Document",
+    "route_paths": "Route Paths",
+    "matched_paths": "{matched}/{total} endpoints matched"
+  }
+}

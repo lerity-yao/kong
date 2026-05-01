@@ -1,0 +1,84 @@
+{
+  "title": "API 文档",
+  "list": {
+    "title": "API 文档",
+    "new": "新增文档",
+    "filter": "筛选文档",
+    "search_name": "搜索名称",
+    "search_name_placeholder": "输入文档名称",
+    "workspace": "工作空间",
+    "workspace_all": "所有工作空间",
+    "empty": {
+      "title": "暂无 API 文档",
+      "message": "上传 Swagger 文档以关联您的后端服务接口。"
+    },
+    "headers": {
+      "name": "名称",
+      "version": "当前版本",
+      "service": "关联服务",
+      "workspace": "工作空间",
+      "created_at": "创建时间",
+      "actions": "操作"
+    }
+  },
+  "detail": {
+    "title": "API 文档：{name}",
+    "version": "版本",
+    "no_service": "未关联服务",
+    "view_service": "查看服务",
+    "debug_mode": "调试模式",
+    "debug_gateway": "网关代理",
+    "debug_direct": "原始地址",
+    "debug_direct_tooltip": "直连后端服务，绕过 Kong 网关",
+    "custom_headers": "自定义请求头",
+    "add_header": "添加请求头",
+    "path_filtered": "已过滤匹配当前路由的接口",
+    "matched_paths": "匹配 {count} 个接口",
+    "no_matched_paths": "未匹配到相关接口"
+  },
+  "upload": {
+    "title": "上传 API 文档",
+    "workspace": "所属工作空间",
+    "file": "选择文件",
+    "file_hint": "支持 .json 格式的 Swagger 2.0 文档",
+    "service": "关联服务",
+    "service_placeholder": "选择要关联的服务（可选）",
+    "name": "文档名称",
+    "name_auto": "关联服务后自动生成",
+    "preview": "文档预览",
+    "preview_title": "标题",
+    "preview_version": "版本",
+    "preview_paths": "接口数量",
+    "drag_hint": "拖拽文件到此处，或点击上传",
+    "invalid_file": "无效的 Swagger 文件格式，请上传 .json 文件"
+  },
+  "versions": {
+    "title": "版本历史",
+    "current": "当前版本",
+    "switch_to": "切换到此版本",
+    "delete": "删除版本",
+    "delete_all": "删除所有版本",
+    "delete_confirm": "确定要删除此版本吗？",
+    "version_deleted": "版本 {version} 已删除",
+    "delete_failed": "删除版本失败"
+  },
+  "edit": {
+    "title": "编辑 API 文档"
+  },
+  "created": "API 文档\u300C{name}\u300D创建成功！",
+  "updated": "API 文档\u300C{name}\u300D更新成功！",
+  "deleted": "API 文档\u300C{name}\u300D删除成功！",
+  "delete_confirm_title": "删除 API 文档",
+  "delete_confirm_body": "此操作不可撤销。确定要删除 API 文档 {name} 吗？",
+  "delete_type_confirm": "输入 {name} 以确认：",
+  "load_failed": "加载 API 文档失败",
+  "create_failed": "创建 API 文档失败",
+  "update_failed": "更新 API 文档失败",
+  "delete_failed": "删除 API 文档失败",
+  "tab": {
+    "no_docs": "该资源暂无关联的 API 文档",
+    "select_doc": "选择文档",
+    "route_paths": "路由路径",
+    "matched_paths": "已匹配 {matched}/{total} 个接口"
+  }
+}

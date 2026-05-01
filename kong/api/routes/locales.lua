@@ -26,6 +26,7 @@ local SUPPORTED_MODULES = {
   Key_Sets         = true,
   Teams            = true,
   RBAC             = true,
+  API_Docs         = true,
 }
 
 

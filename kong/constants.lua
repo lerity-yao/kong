@@ -159,6 +159,7 @@ local constants = {
     "rbac_role_entities",
     "rbac_groups",
     "admins",
+    "api_docs",
   },
   ENTITY_CACHE_STORE = setmetatable({
     consumers = "cache",
